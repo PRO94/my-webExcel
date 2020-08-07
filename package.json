@@ -23,8 +23,12 @@
     "url": "https://github.com/PRO94/my-webExcel/issues"
   },
   "homepage": "https://github.com/PRO94/my-webExcel#readme",
+  "browserslist": "> 0.25%, not dead",
   "private": true,
   "devDependencies": {
+    "@babel/core": "^7.11.1",
+    "@babel/preset-env": "^7.11.0",
+    "babel-loader": "^8.1.0",
     "clean-webpack-plugin": "^3.0.0",
     "copy-webpack-plugin": "^6.0.3",
     "css-loader": "^4.2.1",
