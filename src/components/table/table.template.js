@@ -5,8 +5,7 @@ const CODES = {
 
 function toCell(_, col) {
   return `
-    <div class="cell" contenteditable data-col="${col}">
-    </div>
+    <div class="cell" contenteditable data-col="${col}"></div>
   `
 }
 
@@ -37,7 +36,7 @@ function toChar(_, index) {
 }
 
 export function createTable(rowsCount = 15) {
-  const colsCount = CODES.Z - CODES.A + 1 // Compute cols count
+  const colsCount = CODES.Z - CODES.A + 1
   const rows = []
 
   const cols = new Array(colsCount)
