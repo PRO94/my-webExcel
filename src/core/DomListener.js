@@ -31,7 +31,7 @@ export class DomListener {
   }
 }
 
-// imput => onInput
+// input => onInput
 function getMethodName(eventName) {
   return 'on' + capitalize(eventName)
 }
