@@ -7,18 +7,16 @@ export function createStore(rootReducer, initialState = {}) {
       listeners.push(fn)
       return {
         unsubscribe() {
-          listeners = listeners.filter(listener => listeners !== fn)
+          listeners = listeners.filter(listener => listener !== fn)
         }
       }
     },
     dispatch(action) {
       state = rootReducer(state, action)
-      listeners.forEach(listener => listener(state));
+      listeners.forEach(listener => listener(state))
     },
     getState() {
       return JSON.parse(JSON.stringify(state))
     }
   }
 }
-
-// Using function and closure for protecting store from outside changing.
