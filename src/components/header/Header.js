@@ -4,6 +4,8 @@ import {changeTitle} from '@/redux/actions'
 import {defaultTitle} from '@/constants'
 import {debounce} from '@/core/utils'
 import {ActiveRoute} from '@/core/routes/ActiveRoute'
+import {StateProcessor} from '@core/page/StateProcessor'
+import {LocalStorageClient} from '@/shared/LocalStorageClient'
 
 export class Header extends ExcelComponent {
   static className = 'excel__header'
@@ -14,6 +16,10 @@ export class Header extends ExcelComponent {
       listeners: ['input', 'click'],
       ...options
     })
+
+    this.processor = new StateProcessor(
+        new LocalStorageClient(ActiveRoute.param)
+    )
   }
 
   prepare() {
@@ -43,13 +49,13 @@ export class Header extends ExcelComponent {
     this.$dispatch(changeTitle($target.text()))
   }
 
-  onClick(event) {
+  async onClick(event) {
     const $target = $(event.target)
 
     if ($target.data.button === 'remove') {
       const decision = confirm('Are you sure you want to remove current table?')
       if (decision) {
-        localStorage.removeItem('excel:' + ActiveRoute.param)
+        await this.processor.remove()
         ActiveRoute.navigate('')
       }
     } else if ($target.data.button === 'exit') {
